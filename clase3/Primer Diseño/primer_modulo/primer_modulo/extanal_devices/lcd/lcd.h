@@ -15,9 +15,13 @@
 #define ENTRY_MODE 0x07
 #define ON_DISPLAY 0x0F
 #define OFF_DISPLAY 0x08
-#define SHIFT_LEFT 0x1C
-#define SET_FUNCTIONS 0x24
-
+#define SHIFT_RIGTH 0x1C
+#define SHIFT_LEFT 0x18
+#define SET_FUNCTIONS 0x38
+#define SET_INIT_ADDRESS_FIRST_ROW 0x80
+#define SET_END_ADDRESS_FIRST_ROW 0x8F
+#define SET_INIT_ADDRESS_SECOND_ROW 0xC0
+#define SET_END_ADDRESS_SECOND_ROW 0xCF
 /* Usage ports */
 
 #define D14 PORTB7
@@ -37,9 +41,9 @@
 #define SHORT_AWAIT  5
 
 void init_lcd();
-void set_action_lcd(uint8_t action);
-
-
-
+void set_action_lcd(uint8_t);
+void send_char(char);
+void goToXY(int,int);
+void write_string(char *);
 
 #endif /* LCD_H_ */

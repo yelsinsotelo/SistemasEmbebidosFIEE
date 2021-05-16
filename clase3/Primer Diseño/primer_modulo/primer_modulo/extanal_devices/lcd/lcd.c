@@ -23,6 +23,9 @@ void init_lcd(){
 	L_PIN(C,RS);
 	L_PIN(C,RW);
 	L_PIN(C,EN);
+	set_action_lcd(ON_DISPLAY);
+	set_action_lcd(SET_FUNCTIONS);
+
 } 
 
 void set_action_lcd (uint8_t action) {
@@ -32,3 +35,23 @@ void set_action_lcd (uint8_t action) {
 	_delay_ms(SHORT_AWAIT);
 	L_PIN(C,EN);
 }
+
+void send_char(char caracter){
+	H_PIN(C,RS);
+	SET_VALUE_PORT(B,caracter);
+	_delay_ms(LONG_AWAIT);
+	H_PIN(C,EN);
+	_delay_ms(SHORT_AWAIT);
+	L_PIN(C,EN);
+	L_PIN(C,RS);
+}
+void goToXY(int x, int y){
+	set_action_lcd((y==2)*0x40+0x80+x);
+}
+
+void write_string(char * buf){
+	while(*buf !='\0'){
+		send_char(*(buf++));
+	}
+}
+
